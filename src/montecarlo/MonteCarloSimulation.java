@@ -56,5 +56,27 @@ public class MonteCarloSimulation {
 													Random rnd,
 													StatCollector stat) {
 		//Write your code here
+		//On cherche N tel que Z_(1-alpha/2) * S/(N)^1/2 <= DeltaMax
+
+		//Runs initiaux :
+		simulateNRuns(exp, initialNumberOfRuns, rnd, stat);
+
+		//Estimer le nombre de réalisations supplémentaire :
+
+		//Calculer la demi-largeur actuelle
+		double demiLargeur = stat.getConfidenceIntervalHalfWidth(level);
+
+		if(demiLargeur <= maxHalfWidth){ //C'est ok on se barre
+			return;
+		}
+
+		System.out.println(level);
+
+		//Estimation du nombre de réalisations
+		double nbRealNecessaire = Math.pow(stat.getStandardDeviation() * (level + (1-level)/2) / maxHalfWidth, 2);
+
+
+
 	}
+
 }
