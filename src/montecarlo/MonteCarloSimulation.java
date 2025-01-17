@@ -70,12 +70,16 @@ public class MonteCarloSimulation {
 			return;
 		}
 
-		System.out.println(level);
-
 		//Estimation du nombre de réalisations
-		double nbRealNecessaire = Math.pow(stat.getStandardDeviation() * (level + (1-level)/2) / maxHalfWidth, 2);
+		long nbRealNecessaire = Math.round(Math.pow(stat.getStandardDeviation() * (level + (1-level)/2) / maxHalfWidth, 2));
+		long nbRealArrondiEnHaut = Math.ceilDiv(nbRealNecessaire,additionalNumberOfRuns) * additionalNumberOfRuns;
 
+		simulateNRuns(exp, nbRealArrondiEnHaut, rnd, stat);
 
+		while(!(stat.getConfidenceIntervalHalfWidth(level) <= maxHalfWidth)){ //C'est ok on se barre
+			//On resimule jusqu'à ce qu'on arrive
+			simulateNRuns(exp, additionalNumberOfRuns, rnd, stat);
+		}
 
 	}
 
