@@ -1,0 +1,35 @@
+SIO - LABO 3 - MONTE CARLO
+======= DEBUT DE LA SIMULATION 1 ==========
+
+Première simulation (10^-4)
+Nombre d'observations     : 96'100'000
+Moyenne                   : 0,507267
+Intervalle de confiance   : [0,507167, 0,507367]
+Variance                  : 0,249947
+Déviation standard        : 0,499947
+Durée de calcul           : 12,025730 secondes
+
+Seconde simulation (5*10^-5)
+Nombre d'observations     : 384'100'000
+Moyenne                   : 0,507301
+Intervalle de confiance   : [0,507251, 0,507351]
+Variance                  : 0,249947
+Déviation standard        : 0,499947
+Durée de calcul           : 43,984103 secondes
+
+Troisième simulation (2.5*10^-5)
+Nombre d'observations     : 1'536'400'000
+Moyenne                   : 0,507314
+Intervalle de confiance   : [0,507289, 0,507339]
+Variance                  : 0,249947
+Déviation standard        : 0,499947
+Durée de calcul           : 173,436655 secondes
+
+======= DEBUT DE LA SIMULATION 2 ==========
+Pourcentage de valeur ok  : 0,9540
+Intervalle de confiance   : [0,941010, 0,966990]
+Durée de calcul           : 114,711881 secondes
+
+======= DEBUT DE LA SIMULATION 3 ==========
+Taille de groupe minimale trouvée : 88
+Durée de calcul                   : 3,031266 secondes

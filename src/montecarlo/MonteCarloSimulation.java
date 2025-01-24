@@ -1,5 +1,6 @@
 package montecarlo;
 
+import statistics.InverseStdNormalCDF;
 import statistics.StatCollector;
 
 import java.util.Random;
@@ -55,29 +56,34 @@ public class MonteCarloSimulation {
 													long additionalNumberOfRuns,
 													Random rnd,
 													StatCollector stat) {
-		//Write your code here
-		//On cherche N tel que Z_(1-alpha/2) * S/(N)^1/2 <= DeltaMax
 
 		//Runs initiaux :
 		simulateNRuns(exp, initialNumberOfRuns, rnd, stat);
 
-		//Estimer le nombre de réalisations supplémentaire :
-
 		//Calculer la demi-largeur actuelle
-		double demiLargeur = stat.getConfidenceIntervalHalfWidth(level);
+		double halfWidth = stat.getConfidenceIntervalHalfWidth(level);
 
-		if(demiLargeur <= maxHalfWidth){ //C'est ok on se barre
+		// Vérification si la précision souhaitée est déjà atteinte
+		if(halfWidth <= maxHalfWidth){
 			return;
 		}
 
+		// Calcul du nombre de réalisations nécessaires
+		// Utilisation de la formule N = (z_(1-α/2) * S / ∆max)²
+		double quantile = InverseStdNormalCDF.getQuantile((level + (1-level)/2));
 		//Estimation du nombre de réalisations
-		long nbRealNecessaire = Math.round(Math.pow(stat.getStandardDeviation() * (level + (1-level)/2) / maxHalfWidth, 2));
-		long nbRealArrondiEnHaut = Math.ceilDiv(nbRealNecessaire,additionalNumberOfRuns) * additionalNumberOfRuns;
+		long nbRealNecessary = Math.round(Math.pow(stat.getStandardDeviation() * quantile / maxHalfWidth, 2));
 
-		simulateNRuns(exp, nbRealArrondiEnHaut, rnd, stat);
+		// Calcul du nombre de réalisations supplémentaires arrondi au multiple supérieur tout en enlèvant les
+		// réalisations initiales.
+		long nbRealRoundUp = Math.ceilDiv(nbRealNecessary,additionalNumberOfRuns) * additionalNumberOfRuns - initialNumberOfRuns;
 
-		while(!(stat.getConfidenceIntervalHalfWidth(level) <= maxHalfWidth)){ //C'est ok on se barre
-			//On resimule jusqu'à ce qu'on arrive
+		// Exécution des réalisations supplémentaires calculées
+		simulateNRuns(exp, nbRealRoundUp, rnd, stat);
+
+		// Boucle de vérification et ajouts si nécessaire
+		// Continue tant que la précision souhaitée n'est pas atteinte
+		while(!(stat.getConfidenceIntervalHalfWidth(level) <= maxHalfWidth)){
 			simulateNRuns(exp, additionalNumberOfRuns, rnd, stat);
 		}
 
