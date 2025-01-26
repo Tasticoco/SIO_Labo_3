@@ -50,11 +50,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		System.out.println("SIO - LABO 3 - MONTE CARLO");
-		System.out.println("======= DEBUT DE LA SIMULATION 1 ==========");
-		simulation1();
-		System.out.println("======= DEBUT DE LA SIMULATION 2 ==========");
-		simulation2();
-		System.out.println("======= DEBUT DE LA SIMULATION 3 ==========");
+		//simulation1();
+		//simulation2();
 		simulation3();
 	}
 
@@ -83,6 +80,7 @@ public class Main {
 	 * - L'intervalle de confiance complet.
 	 */
 	private static void simulation1(){
+		System.out.println("======= DEBUT DE LA SIMULATION 1 ==========");
 		Experiment birthdayExp = new BirthdayParadoxGenericExperiment(Constants.BASE_GROUP_SIZE, Constants.NB_DAYS_IN_A_YEAR, Constants.BASE_THRESHOLD);
 
 		runSimulation("Première simulation (10^-4)"		, birthdayExp, Constants.MAX_HALF_WIDTH_EXP1);
@@ -145,7 +143,7 @@ public class Main {
 	 * de 95% est effectivement atteint dans la pratique.
 	 */
 	private static void simulation2(){
-
+		System.out.println("======= DEBUT DE LA SIMULATION 2 ==========");
 		StatCollector stat = new StatCollector();
 		StatCollector statFinal = new StatCollector();
 
@@ -210,7 +208,7 @@ public class Main {
 	 * Affiche la taille minimale du groupe satisfaisant le critère
 	 */
 	private static void simulation3(){
-
+		System.out.println("======= DEBUT DE LA SIMULATION 3 ==========");
 		StatCollector stat = new StatCollector();
 		int minNumberOfPeople = 0;
 
@@ -229,7 +227,7 @@ public class Main {
 
 		double executionTime = (System.nanoTime() - startTime) / 1e9;
 
-		final int LABEL_WIDTH = 25;
+		final int LABEL_WIDTH = 35;
 		String formatLabel = "%-" + LABEL_WIDTH + "s : ";
 
 		System.out.printf(formatLabel + "%d\n", "Taille de groupe minimale trouvée", minNumberOfPeople);
