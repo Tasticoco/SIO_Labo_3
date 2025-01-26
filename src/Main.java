@@ -83,9 +83,9 @@ public class Main {
 		System.out.println("======= DEBUT DE LA SIMULATION 1 ==========");
 		Experiment birthdayExp = new BirthdayParadoxGenericExperiment(Constants.BASE_GROUP_SIZE, Constants.NB_DAYS_IN_A_YEAR, Constants.BASE_THRESHOLD);
 
-		runSimulation("Première simulation (10^-4)"		, birthdayExp, Constants.MAX_HALF_WIDTH_EXP1);
-		runSimulation("Seconde simulation (5*10^-5)"		, birthdayExp, Constants.HALF_WIDTH_EXP1_SECOND);
-		runSimulation("Troisième simulation (2.5*10^-5)"	, birthdayExp, Constants.HALF_WIDTH_EXP1_THIRD);
+		runSimulation("Première intervalle (10^-4)"		, birthdayExp, Constants.MAX_HALF_WIDTH_EXP1);
+		runSimulation("Seconde intervalle (5*10^-5)"		, birthdayExp, Constants.HALF_WIDTH_EXP1_SECOND);
+		runSimulation("Troisième intervalle (2.5*10^-5)"	, birthdayExp, Constants.HALF_WIDTH_EXP1_THIRD);
 	}
 
 	/**
